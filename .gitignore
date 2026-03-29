@@ -1,0 +1,29 @@
+# Data — raw data should never be committed
+data/raw/
+data/interim/
+data/processed/
+
+# Models — serialized model files
+models/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,84 @@
+=== RELATORIO DE ANALISE EXPLORATORIA (EDA) ===
+
+1. ESTRUTURA DOS DADOS
+- Total de Linhas Lidas: 132478
+- Total de Colunas Iniciais: 15
+
+2. VALORES NULOS ENCONTRADOS E MAPEADOS
+var1      110
+var2      108
+var3      116
+var4      449
+var5      108
+var6      109
+TARGET    430
+var8      110
+var9      110
+var10     538
+var11     420
+var12     238
+var13     280
+var14     109
+var15     108
+
+3. ESTATISTICAS DESCRITIVAS OFICIAIS
+           count         mean            std           min         25%         50%         75%           max
+var1    132368.0    81.225029      34.272493 -7.153759e+00   78.260603   88.759390   98.883265  2.888047e+02
+var2    132370.0   219.955100      98.757594 -2.847290e+01  174.864650  267.082850  278.014700  3.776072e+02
+var3    132362.0     5.792956      12.766513 -1.496452e+01    6.279173    7.132337    8.124713  3.175135e+02
+var4    132029.0   137.383551      37.341092  0.000000e+00  148.955000  150.233600  150.957700  1.596021e+02
+var5    132370.0   577.599741     230.423999 -7.060547e+01  591.867025  660.127450  707.375100  8.768228e+02
+var6    132369.0    89.351770      21.351326  0.000000e+00   96.454670   97.287600   97.898800  1.158181e+02
+TARGET  132048.0    15.282701       1.718874  0.000000e+00   15.012160   15.476910   15.876300  1.846514e+01
+var8    132368.0   368.768963     146.377691 -1.423645e+02  395.358800  416.650300  436.381375  1.680839e+03
+var9    132368.0   342.708025     134.692812 -3.699641e+00  346.703250  395.271900  415.404625  5.317067e+02
+var10   131940.0    64.082036      29.199097 -1.657643e+01   60.766000   78.794450   81.860980  1.043953e+02
+var11   132058.0    11.892930       1.145929  0.000000e+00   11.600000   11.700000   11.900000  2.000000e+01
+var12   132240.0     7.156404       0.317352  0.000000e+00    7.000000    7.200000    7.400000  8.000000e+00
+var13   132198.0   349.816033     130.391779  0.000000e+00  267.011925  353.337555  428.193878  9.273045e+02
+var14   132369.0  1885.495259  166162.251813 -3.614361e+07   33.630940   36.050710   40.500830  2.118109e+07
+var15   132370.0   159.567941      62.995030 -3.997734e+01  169.476852  183.614731  192.078655  1.313813e+03
+
+4. INFLUENCIA DAS VARIAVEIS (CORRELACAO PREDITIVA - T+60)
+- Aplicado Shift(-60) no TARGET para capturar correlação pro-ativa e evitar reatividade no instante T.
+TARGET    1.000000
+var4      0.550458
+var6      0.537908
+var2      0.504705
+var10     0.503266
+var15     0.490185
+var5      0.483599
+var13     0.470874
+var8      0.463247
+var9      0.458096
+var1      0.391583
+var3      0.151064
+var14    -0.007380
+var11    -0.117976
+var12    -0.149173
+
+5. TRATAMENTO E DETECCAO DE OUTLIERS
+- Anomalia severa logica detectada no sensor 'var14' (Escala absurda 10^7, sem correlacao preditiva).
+- As demais variaveis comportam-se dentro da fisica normal da operacao de processo.
+- Os plots originais constam na pasta reports/figures.
+
+6. JUSTIFICATIVA PARA ENGENHARIA TEMPORAL (LAGS)
+- Foram plotados graficos de Autocorrelacao (ACF) e Parcial (PACF) para comprovar a memoria inercial do alvo (Ate 60+ minutos).
+
+7. DIAGNOSTICO FISICO: PRE-PARADA (60 MIN ANTES)
+Analise de comportamento dos sensores momentos antes do KPI colapsar (< 5):
+       Media_Normal  Media_Pre_Queda  Variacao_Pct
+var14   1920.813118      -730.810200   -138.046918
+var3       5.841655         2.910195    -50.182015
+var4     138.661786        70.756732    -48.971715
+var1      81.997442        42.476184    -48.198159
+var15    160.995451        83.426147    -48.181053
+var8     372.131039       195.304414    -47.517301
+var9     345.893715       182.594322    -47.210859
+var5     582.817323       309.583097    -46.881624
+var2     221.831554       120.193066    -45.817868
+var10     64.676725        35.390318    -45.281215
+var6      89.961832        57.068029    -36.564177
+var13    351.712549       256.195244    -27.157776
+var11     11.898641        11.610303     -2.423289
+var12      7.155213         7.251556      1.346466

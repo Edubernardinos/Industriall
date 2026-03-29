@@ -1,0 +1,18 @@
+=== RELATORIO DE PRE-PROCESSAMENTO E FEATURE ENGINEERING ===
+
+1. TRANSFORMACOES MECANICAS REALIZADAS
+- Delecao Permanente: 'var14' descartada devido a anomalia severa sem correlacao com a producao.
+- Arquitetura Preditiva de Alvo: Criacao de 'target_futuro' via janela de shift(-60) cravando 1h de projecao ao futuro.
+- Features Ciclicas Cronologicas: Conversao polinomial de hora/dia para o espaco trigonometrico continuo (Seno/Cosseno).
+- Engrenagens do Passado: Geracao de Lags longos (10, 30, 60, 90 min) abrangendo memoria fluida dos top 8 sensores mais vitais.
+- Filtro Anti-Ilusao de Hardware: Lags auto-regressivos de 1 e 5 min foram REMOVIDOS para impedir que o modelo fraudasse decorando a lenta taxa de transmissao do sinal fisico dos sensores.
+- Tratamento Avancado de Ruidos: A substituicao de Medias (.mean) por Medianas (.median) nas janelas rolantes blindou o pre-processamento contra a desconfiguracao temporal causada por Outliers e ruidos eletricos de fracao de segundo.
+
+2. TRATAMENTO CRITICO DE NULOS DA SERIE TEMPORAL
+- Forward Fill Inteligente: Foram preenchidas limitadamente as falhas curtas de rastro (ate 5 min) clonando ultimo estado confiavel do sensor (evitou lacunas temporais fisicas)
+- Limpeza Residual: Remocao de Dropna puro apenas no estagio final, salvando as colunas e tirando sobras inuteis deixadas pela rolagem do tempo.
+
+3. RESULTADOS FINAIS DA BASE PRONTA PARA MODELAGEM
+- Arquivo Treino Consolidado: 113044 amostras, prontas com 79 features para inducao da arvore.
+- Arquivo Teste Oficial: 20101 amostras com 79 features para testar o mundo real.
+- Os datasets maduros de producao foram subidos em espelho Parquet para hipervelocidade no pipeline de Modelagem.
